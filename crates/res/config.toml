@@ -1,0 +1,110 @@
+# ebpf-open 配置
+
+[settings]
+modify_enabled = true
+hot_reload = true
+
+[whitelist]
+uid = []
+pid = []
+
+# --- syscall 定义 ---
+
+[[syscall]]
+name = "openat"
+nr = { arm64 = 56, arm32 = 322 }
+arm64 = [
+    { reg = 1, type = "str", name = "path" },
+    { reg = 2, type = "int", name = "flags" },
+]
+arm32 = [
+    { reg = 1, type = "str", name = "path" },
+]
+
+[[syscall]]
+name = "openat2"
+nr = { arm64 = 437 }
+arm64 = [
+    { reg = 1, type = "str", name = "path" },
+]
+
+[[syscall]]
+name = "execve"
+nr = { arm64 = 221 }
+arm64 = [
+    { reg = 0, type = "str", name = "path" },
+]
+
+[[syscall]]
+name = "execveat"
+nr = { arm64 = 281 }
+arm64 = [
+    { reg = 1, type = "str", name = "path" },
+]
+
+[[syscall]]
+name = "faccessat"
+nr = { arm64 = 48 }
+arm64 = [
+    { reg = 1, type = "str", name = "path" },
+]
+
+[[syscall]]
+name = "statfs"
+nr = { arm64 = 43 }
+arm64 = [
+    { reg = 0, type = "str", name = "path" },
+]
+
+[[syscall]]
+name = "readlinkat"
+nr = { arm64 = 78 }
+arm64 = [
+    { reg = 1, type = "str", name = "path" },
+]
+
+[[syscall]]
+name = "newfstatat"
+nr = { arm64 = 79 }
+arm64 = [
+    { reg = 1, type = "str", name = "path" },
+]
+
+[[syscall]]
+name = "statx"
+nr = { arm64 = 291 }
+arm64 = [
+    { reg = 1, type = "str", name = "path" },
+]
+
+# --- syscall 分组 ---
+
+[[syscall_groups]]
+name = "open_"
+syscalls = ["openat", "openat2"]
+
+[[syscall_groups]]
+name = "exec_"
+syscalls = ["execve", "execveat"]
+
+[[syscall_groups]]
+name = "stat_"
+syscalls = ["faccessat", "statfs", "newfstatat", "statx", "readlinkat"]
+
+# --- print 配置（sys_exit 时输出，含返回值） ---
+
+# [print]
+# groups = ["open_"]
+
+# --- 修改规则 ---
+# 过滤字段三选一：pids, uids, uid_groups
+# exclude_uid 仅 uid_groups 时生效
+# no_restore = true
+
+# [[rules]]
+# groups = ["open_"]
+# modify = "path"
+# from = "/data/local/tmp/a.txt"
+# to = "/data/local/tmp/b.txt"
+# uid_groups = ["app", "iso"]
+# exclude_uid = [10000]

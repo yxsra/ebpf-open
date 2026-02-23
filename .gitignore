@@ -1,0 +1,9 @@
+/target
+/dist
+/sysroot
+/sysroot-musl
+crates/ebpf-open-sys/src/bpf/aarch64/vmlinux5.15
+.misc/
+
+Cargo.lock
+crates/ebpf-open-sys/src/bpf/*.skel.rs

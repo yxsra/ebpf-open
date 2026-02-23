@@ -1,0 +1,12 @@
+[package]
+name = "ebpf-open-sys"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+libbpf-rs = "0.26"
+libbpf-sys = { version = "1.6", features = ["vendored-libbpf", "static"] }
+common = { path = "../common" }
+
+[build-dependencies]
+libbpf-cargo = "0.26"

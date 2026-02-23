@@ -1,0 +1,6 @@
+id=ebpf-open
+name=eBPF Open Monitor
+version=v1.0.0
+versionCode=1
+author=ebpf-open
+description=eBPF-based file access monitor and interceptor for Android

@@ -1,0 +1,12 @@
+[target.aarch64-linux-android]
+linker = "/home/root/ndk/android-ndk-r28c/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android30-clang"
+rustflags = [
+    "-L", "native=/home/root/ebpf-open/sysroot/lib",
+]
+
+[target.aarch64-unknown-linux-musl]
+linker = "/home/root/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc"
+rustflags = [
+    "-L", "native=/home/root/ebpf-open/sysroot-musl/lib",
+    "-C", "target-feature=+crt-static",
+]

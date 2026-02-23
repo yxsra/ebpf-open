@@ -1,0 +1,13 @@
+[package]
+name = "ebpf-open"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+common = { path = "../common" }
+ebpf-open-sys = { path = "../ebpf-open-sys" }
+intercept-config = { path = "../intercept-config" }
+libbpf-rs = "0.26.0"
+libbpf-sys = { version = "1.6.0", features = ["vendored-libbpf", "static"] }
+libc = "0.2"
+anyhow = "1"
